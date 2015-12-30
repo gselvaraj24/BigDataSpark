@@ -7,7 +7,7 @@ version := "0.1.0"
 scalaVersion := "2.10.6"
 
 libraryDependencies ++= Seq(
-  "org.apache.spark" %% "spark-core" % "1.5.2" % "provided",
+  "org.apache.spark" % "spark-core_2.10" % "1.5.2" % "provided",
   "com.fasterxml.jackson.core" % "jackson-databind" % "2.6.1" % "provided",
   "com.fasterxml.jackson.module" % "jackson-module-scala_2.10" % "2.6.1" % "provided",
   "org.scalatest" % "scalatest_2.10" % "2.2.5" % "test"
