@@ -4,6 +4,7 @@ import org.apache.spark.{SparkContext, SparkConf}
 
 /**
   * Created by juha on 27.12.2015.
+  * (c) 2016 Nuvostaq Oy
   */
 object BusDataDriver {
   def main(args: Array[String]) {
