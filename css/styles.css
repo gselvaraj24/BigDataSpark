@@ -1,0 +1,20 @@
+.bg-img {
+    display:block;
+    background-repeat: no-repeat;
+    height: 50px;
+    width: 50px;
+    float: left;
+}
+
+.bg-img.icon-forward {
+    background-image: url("/images/glyphicons/glyphicons-177-forward.png");
+}
+.bg-img.icon-back {
+    background: url("/images/glyphicons/glyphicons-173-rewind.png");
+}
+.bg-img.icon-top {
+    background-image: url("/images/glyphicons/glyphicons-214-arrow-up.png");
+}
+.bg-img.icon-home {
+    background-image: url("/images/glyphicons/glyphicons-21-home.png");
+}
