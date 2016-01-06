@@ -2,121 +2,18 @@ package com.nuvostaq.bigdataspark
 
 import java.util.TimeZone
 
-import com.fasterxml.jackson.databind.{DeserializationFeature, ObjectMapper}
-import com.fasterxml.jackson.module.scala.DefaultScalaModule
 import org.apache.hadoop.io.compress.GzipCodec
 import org.apache.spark.storage.StorageLevel
 import org.apache.spark.{SparkContext, SparkConf}
 import org.joda.time.{DateTimeZone, DateTime}
 
-import scala.util.{Failure, Success, Try}
+import scala.util.{Failure, Success}
 
 /**
   * Created by juha on 27.12.2015.
   * (c) 2016 Nuvostaq Oy
   */
 object BusDataDriver {
-  val followedRoutes = List(
-    ("12", "Hallila - Keskustori P"),
-    ("12", "Keskustori P - Hallila"),
-    ("32", "Keilakuja - Hatanpään sairaala"),
-    ("32", "Hatanpään sairaala - Keilakuja")
-  )
-  val SecondsPerHour: Long = 60 * 60
-  val SecondsPerDay: Long = 24 * SecondsPerHour
-  val partitionCount = 10
-
-  def createRoute(str:String) : Try[BusRouteQuery] = {
-    val m = new ObjectMapper()
-    m.registerModule(DefaultScalaModule)
-    m.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
-    Try(m.readValue(str, classOf[BusRouteQuery]))
-  }
-
-  def createSiri(str:String) : Try[Siri] = {
-    val m = new ObjectMapper()
-    m.registerModule(DefaultScalaModule)
-    m.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
-    Try(m.readValue(str, classOf[Siri]))
-  }
-
-  def createWeather(str:String) : Try[WeatherDataQuery] = {
-    val queryLine = "{\"seq\":"+str+"}"
-    val mapper = new ObjectMapper()
-    mapper.registerModule(DefaultScalaModule)
-    mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
-    Try(mapper.readValue(queryLine, classOf[WeatherDataQuery]))
-  }
-
-  /**
-    * Creates an endpoint combiner
-    * @param pt - route point
-    * @return   - EndPointPair
-    */
-  def createEndpointCombiner(pt: RoutePoint) : EndPointPair = {
-    if (pt == null)
-      null
-    else
-      new EndPointPair(pt.time, pt.dist, pt.time, pt.dist)
-  }
-
-  /**
-    * Endpoint combiner combines a new route point with the current aggregate by selecting
-    *  - the latest start time at the bus's start location (closest to 0)
-    *  - the earliest end time at the bus's final location (maximum distance)
-    * @param collector - current end point pair
-    * @param pt        - new route point
-    * @return          - new collector with start and end point candidates
-    */
-  def endpointCombiner (collector: EndPointPair, pt: RoutePoint) : EndPointPair = {
-    if (collector == null){
-      return createEndpointCombiner(pt)
-    }
-    if (pt == null) return collector
-
-    var startTime = collector.startTime
-    var startDist = collector.startDist
-    var endTime = collector.endTime
-    var endDist = collector.endDist
-
-    if (pt.dist < startDist || (pt.dist == startDist && pt.time > startTime)){
-      startTime = pt.time
-      startDist = pt.dist
-    }
-    if (pt.dist > endDist || (pt.dist == endDist && pt.time < endTime)){
-      endTime = pt.time
-      endDist = pt.dist
-    }
-    new EndPointPair(startTime, startDist, endTime, endDist)
-  }
-
-  /**
-    * Merges the results from two collectors and returns a new EndPointPairby selecting
-    *  - the latest start time at the bus's start location (closest to 0)
-    *  - the earliest end time at the bus's final location (maximum distance)
-    * @param collector1
-    * @param collector2
-    * @return
-    */
-  def endpointMerger (collector1: EndPointPair, collector2: EndPointPair) : EndPointPair = {
-    if (collector1 == null) return collector2
-    if (collector2 == null) return collector1
-
-    var startTime = collector1.startTime
-    var startDist = collector1.startDist
-    var endTime = collector1.endTime
-    var endDist = collector1.endDist
-    if (collector2.startDist < startDist || (collector2.startDist == startDist && collector2.startTime > startTime)){
-      startTime = collector2.startTime
-      startDist = collector2.startDist
-    }
-    if (collector2.endDist > endDist || (collector2.endDist == endDist && collector2.endTime < endTime)){
-      endTime = collector2.endTime
-      endDist = collector2.endDist
-    }
-    new EndPointPair(startTime, startDist, endTime, endDist)
-  }
-
   /**
     * Driver main program
     * @param args - routeFileNamePattern weatherFileNamePattern busActivityFileNamePattern resultNameTemplate
@@ -137,7 +34,7 @@ object BusDataDriver {
     println(s"# route entries = ${routeInput.count()}")
     // Read and process json
     val jsonQueries = routeInput.flatMap(record =>
-      createRoute(record) match {
+      JsonHelper.createRoute(record) match {
         case Success(result) => Some(result)
         case Failure(exception) => None
       }
@@ -155,7 +52,7 @@ object BusDataDriver {
     println(s"# weather entries = ${weatherInput.count()}")
     val targetPlace = "Tampere Härmälä"
     val weatherRdd = weatherInput.flatMap(queryLine => {
-      val queryResult = createWeather(queryLine)
+      val queryResult = JsonHelper.createWeather(queryLine)
       queryResult match {
         case Success(result) => Some(result)
         case Failure(exception) => None
@@ -179,12 +76,11 @@ object BusDataDriver {
     println(s"# bus activity entries = ${activityInput.count()}")
     val siriData = activityInput
       .flatMap(record => {
-        createSiri(record) match {
-          case  Success(result) => {
+        JsonHelper.createSiri(record) match {
+          case  Success(result) =>
             val ts = result.Siri.ServiceDelivery.ResponseTimestamp
             val key = DateTypeConverter.toEpochDay(new DateTime(ts))
             Some((s"$key-siri", result))
-          }
           case _ => None
         }
       })
@@ -192,7 +88,7 @@ object BusDataDriver {
     // Calculate the time-stamped distance for each activity location
     val distsForRoutes = siriData.flatMap {
       case (inputKey, siri: Siri) =>
-        followedRoutes.flatMap(rn =>
+        Config.followedRoutes.flatMap(rn =>
           routes.filter(rr => rr.name == rn._2) // Only the interesting routes are processed
             .flatMap(rr => {
               try {
@@ -230,7 +126,7 @@ object BusDataDriver {
     // Finally, calculate the end point pairs with time and distance info for the start and end
     // using combineByKey aggregation
     val endPointPairs = distsForRoutes
-      .combineByKey(createEndpointCombiner, endpointCombiner, endpointMerger)
+      .combineByKey(EndPointCombiner.create, EndPointCombiner.combiner, EndPointCombiner.merger)
       .filter(_._1.matches("^1[6-9].*")) // Ignore failed keys without epoch day number
       // Process the aggregate and create the result key-value pairs
       .map(epp => {
@@ -262,12 +158,12 @@ object BusDataDriver {
     val endPointsWithWeather = endPointPairs
       .leftOuterJoin(weatherRdd)
       .map(e => {
-        val (key, (busData, weatherData)) = e
+        val (_, (busData, weatherData)) = e
         val wd = weatherData match {
           case Some(w)  => s"${w.temp},${w.rain}"
           case None     => "-100,-100"
         }
-        s"${busData},$wd"
+        s"$busData,$wd"
       })
     // And save the result
     endPointsWithWeather.saveAsTextFile(outputFile+".endpweather")
