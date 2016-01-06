@@ -1,5 +1,5 @@
 #!/bin/bash
-export VERS=0.2.0
+export VERS=0.2.1
 export DATADIR=src/test/resources
 export RESULTDIR=/tmp/sparkout
 rm -fr ${RESULTDIR}*

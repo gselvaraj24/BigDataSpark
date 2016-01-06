@@ -17,7 +17,7 @@ case class ServiceDelivery(ResponseTimestamp: Long, VehicleMonitoringDelivery: S
 case class SiriData(ServiceDelivery: ServiceDelivery, version: String)
 case class Siri(Siri: SiriData)
 
-// This is the output type; list of time-stamped vehicles locations including the journey reference,
+// This is the output type; list of time-stamped vehicles locations (latitude, longitude) including the journey reference,
 // which is used to identify the actual bus
 case class TimedLocation(ref:String,location: VehicleLocation, timeStamp: Long)
 
