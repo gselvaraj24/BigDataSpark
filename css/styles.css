@@ -1,3 +1,17 @@
+
+body {
+    font-size: 16px;
+}
+
+code {
+    background-color: #e0e0e0;
+    color: #404040;
+}
+
+li {
+    margin-bottom: 10px;
+}
+
 .bg-img {
     display:block;
     background-repeat: no-repeat;
@@ -7,15 +21,12 @@
     margin-right: 15px;
 }
 
-body {
-    font-size: 16px;
-}
-li {
-    margin-bottom: 10px;
-}
-
 .footer {
     font-size: 14px;
+}
+
+.footnote {
+    font-size: 12px;
 }
 
 .center {
