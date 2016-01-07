@@ -8,7 +8,6 @@
         </div>
         <div class="row">
             <p class="pull-right">
-                <a name="navigation"></a>
                 <a href="/BigDataSpark/" title="Blog home"><img class="bg-img" src="/BigDataSpark/images/glyphicons/glyphicons-21-home.png"></a>
                 {% if page.previous.url %} <a href="/BigDataSpark/{{page.previous.url}}" title="Previous Post: {{page.previous.title}}"><img class="bg-img" src="/BigDataSpark/images/glyphicons/glyphicons-173-rewind.png"></a> {% endif %}
                 <a href="#" title="Top"><img class="bg-img" src="/BigDataSpark/images/glyphicons/glyphicons-214-arrow-up.png"></a>
@@ -17,5 +16,7 @@
             <p>Page last generated on {{ site.time | date: "%B %e, %Y" }}</p><br/>
         </div>
     </div>
-    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+    <script>
+        !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+    </script>
 </footer>

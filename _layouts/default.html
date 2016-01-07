@@ -18,12 +18,12 @@
 <div class="container">
     <div class="col-md-10">
         {{ content }}
-        <a name="disqus_start"></a>
-        <hr>
+        <div id="disqus_thread"/>
     </div>
-    <div id="disqus_thread"/>
+    <a name="disqus_area"><h3>Discussion</h3></a>
 </div>
 
+{% include footer.html %}
 <script>
     /**
      *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
@@ -32,7 +32,7 @@
     var disqus_config = function () {
         this.page.identifier = '{{ page.url }}';
         this.page.url = 'http://nuvostaq.github.com{{ page.url }}';
-     };
+    };
     (function() {
         var d = document, s = d.createElement('script');
 
@@ -42,7 +42,5 @@
         (d.head || d.body).appendChild(s);
     })();
 </script>
-<hr>
-{% include footer.html %}
 </body>
 </html>

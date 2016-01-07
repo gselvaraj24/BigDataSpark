@@ -22,7 +22,14 @@ li {
 }
 
 .footer {
+    padding-top: 5px;
     font-size: 14px;
+    position:fixed;
+    left:0px;
+    bottom:0px;
+    height:80px;
+    width:100%;
+    background:lightgrey;
 }
 
 .footnote {
@@ -37,4 +44,8 @@ li {
 
 .margin-top {
     margin-top: 5px;
+}
+
+#disqus_thread {
+    margin-bottom: 75px;
 }
