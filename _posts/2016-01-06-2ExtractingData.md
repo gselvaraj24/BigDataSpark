@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Extracting and processing data using Spark
+title: Extracting and processing data using Spark (DRAFT)
 summary: This post describes how Spark can be used to extract and process data from the bus timing and weather data sources.
 ---
 

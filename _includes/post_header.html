@@ -5,12 +5,20 @@
 </div>
 <div class="row">
     <div class="col-sm-6">
-        <h5><strong>{{ page.date | date: "%B %e, %Y" }} <small>. {{ page.category }} . <a href="http://{{page.hostname}}/{{ page.url }}#disqus_thread" data-disqus-identifier="{{ page.url }}">Comments</a></small></strong>
+        <h5><strong>{{ page.date | date: "%B %e, %Y" }}
+            <small>
+                &nbsp;in {{ page.category }}
+                &nbsp;<a href="#disqus_start" data-disqus-identifier="{{ page.url }}">Comments</a>
+                &nbsp;<a href="#navigation">Navigation</a>
+            </small>
+        </strong>
             <!--<br/><small>Tags: {% for tag in page.tags %}-->
                 <!--<a href="/BigDataSpark/tags/{{ tag }}" title="View posts tagged with &quot;{{ tag }}&quot;">-->
                     <!--<u>{{ tag }}</u></a>  {% if forloop.last != true %} {% endif %} {% endfor %} </small><br/>-->
             <br/>
-            <a href="https://twitter.com/share" class="twitter-share-button" data-via="juhahak"> </a>
+            <div class="margin-top">
+                <a href="https://twitter.com/share" class="twitter-share-button" data-via="juhahak"> </a>
+            </div>
         </h5>
     </div>
 </div>
