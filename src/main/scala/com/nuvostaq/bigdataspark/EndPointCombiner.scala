@@ -10,7 +10,7 @@ object EndPointCombiner {
     * @param pt - route point
     * @return   - EndPointPair
     */
-  def create(pt: RoutePoint) : EndPointPair = {
+  def createCombiner(pt: RoutePoint) : EndPointPair = {
     if (pt == null)
       null
     else
@@ -18,16 +18,16 @@ object EndPointCombiner {
   }
 
   /**
-    * Endpoint combiner combines a new route point with the current aggregate by selecting
+    * Combines a new route point with the current aggregate by selecting
     *  - the latest start time at the bus's start location (closest to 0)
     *  - the earliest end time at the bus's final location (maximum distance)
     * @param collector - current end point pair
     * @param pt        - new route point
     * @return          - new collector with start and end point candidates
     */
-  def combiner(collector: EndPointPair, pt: RoutePoint) : EndPointPair = {
+  def mergeValue(collector: EndPointPair, pt: RoutePoint) : EndPointPair = {
     if (collector == null){
-      return create(pt)
+      return createCombiner(pt)
     }
     if (pt == null) return collector
 

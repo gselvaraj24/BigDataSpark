@@ -126,7 +126,7 @@ object BusDataDriver {
     // Finally, calculate the end point pairs with time and distance info for the start and end
     // using combineByKey aggregation
     val endPointPairs = distsForRoutes
-      .combineByKey(EndPointCombiner.create, EndPointCombiner.combiner, EndPointCombiner.merger)
+      .combineByKey(EndPointCombiner.createCombiner, EndPointCombiner.mergeValue, EndPointCombiner.merger)
       .filter(_._1.matches("^1[6-9].*")) // Ignore failed keys without epoch day number
       // Process the aggregate and create the result key-value pairs
       .map(epp => {
@@ -153,6 +153,8 @@ object BusDataDriver {
         // Create the key-value pair
         (key, s"$lineNum,$originName,$epochDay,${PeriodFactory.ConvertToString(dateType)},$scheduledStartHour,$scheduledStartMinute,$actualStartHour,$actualStartMinute,${epp._2.startDist},${epp._2.endDist},$duration")
       })
+    endPointPairs.persist(StorageLevel.MEMORY_ONLY)
+    endPointPairs.saveAsTextFile(outputFile+".epp", classOf[GzipCodec])
 
     // Join the end points with weather data
     val endPointsWithWeather = endPointPairs
