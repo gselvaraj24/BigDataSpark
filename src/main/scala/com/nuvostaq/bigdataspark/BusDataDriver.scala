@@ -78,9 +78,13 @@ object BusDataDriver {
       .flatMap(record => {
         JsonHelper.createSiri(record) match {
           case  Success(result) =>
-            val ts = result.Siri.ServiceDelivery.ResponseTimestamp
-            val key = DateTypeConverter.toEpochDay(new DateTime(ts))
-            Some((s"$key-siri", result))
+            try {
+              val ts = result.Siri.ServiceDelivery.ResponseTimestamp
+              val key = DateTypeConverter.toEpochDay(new DateTime(ts))
+              Some((s"$key-siri", result))
+            } catch {
+              case e: Exception => None
+            }
           case _ => None
         }
       })

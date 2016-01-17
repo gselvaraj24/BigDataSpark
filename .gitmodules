@@ -1,0 +1,3 @@
+[submodule "BusDataSample"]
+	path = BusDataSample
+	url = https://github.com/nuvostaq/BusDataSample.git
