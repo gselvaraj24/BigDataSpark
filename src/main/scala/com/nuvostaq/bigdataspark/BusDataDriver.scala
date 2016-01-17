@@ -31,7 +31,7 @@ object BusDataDriver {
 
     // Load route input data and save it
     val routeInput =  sc.textFile(routeFiles)
-    println(s"# route entries = ${routeInput.count()}")
+    //println(s"# route entries = ${routeInput.count()}")
     // Read and process json
     val jsonQueries = routeInput.flatMap(record =>
       JsonHelper.createRoute(record) match {
@@ -44,12 +44,12 @@ object BusDataDriver {
       case qr: BusRouteQuery => qr.body.map(bd => RouteConverter.convert(bd))
       case _ => None
     }
-    routesRdd.persist(StorageLevel.MEMORY_ONLY)
-    routesRdd.saveAsTextFile(outputFile+".routes", classOf[GzipCodec])
+    //routesRdd.persist(StorageLevel.MEMORY_ONLY)
+    //routesRdd.saveAsTextFile(outputFile+".routes", classOf[GzipCodec])
 
     // Load weather input data and save it
     val weatherInput =  sc.textFile(weatherFiles)
-    println(s"# weather entries = ${weatherInput.count()}")
+    //println(s"# weather entries = ${weatherInput.count()}")
     val targetPlace = "Tampere Härmälä"
     val weatherRdd = weatherInput.flatMap(queryLine => {
       val queryResult = JsonHelper.createWeather(queryLine)
@@ -67,13 +67,13 @@ object BusDataDriver {
         Some(weatherDataConverter.weatherDataSeq)
       }
     }).flatMap(w => w)
-    weatherRdd.persist(StorageLevel.MEMORY_ONLY)
-    weatherRdd.saveAsTextFile(outputFile+".weather", classOf[GzipCodec])
+    //weatherRdd.persist(StorageLevel.MEMORY_ONLY)
+    //weatherRdd.saveAsTextFile(outputFile+".weather", classOf[GzipCodec])
 
     val routes = routesRdd.collect()
     // Load bus activity input
     val activityInput =  sc.textFile(activityFiles)
-    println(s"# bus activity entries = ${activityInput.count()}")
+    //println(s"# bus activity entries = ${activityInput.count()}")
     val siriData = activityInput
       .flatMap(record => {
         JsonHelper.createSiri(record) match {
@@ -120,8 +120,8 @@ object BusDataDriver {
         )
       case _ => List(("na-process siri", new RoutePoint("", "", "", 0, 0.0)))
     }
-    distsForRoutes.persist(StorageLevel.MEMORY_ONLY)
-    distsForRoutes.saveAsTextFile(outputFile+".dist", classOf[GzipCodec])
+    //distsForRoutes.persist(StorageLevel.MEMORY_ONLY)
+    //distsForRoutes.saveAsTextFile(outputFile+".dist", classOf[GzipCodec])
 
     // Finally, calculate the end point pairs with time and distance info for the start and end
     // using combineByKey aggregation
@@ -153,8 +153,8 @@ object BusDataDriver {
         // Create the key-value pair
         (key, s"$lineNum,$originName,$epochDay,${PeriodFactory.ConvertToString(dateType)},$scheduledStartHour,$scheduledStartMinute,$actualStartHour,$actualStartMinute,${epp._2.startDist},${epp._2.endDist},$duration")
       })
-    endPointPairs.persist(StorageLevel.MEMORY_ONLY)
-    endPointPairs.saveAsTextFile(outputFile+".epp", classOf[GzipCodec])
+    //endPointPairs.persist(StorageLevel.MEMORY_ONLY)
+    //endPointPairs.saveAsTextFile(outputFile+".epp", classOf[GzipCodec])
 
     // Join the end points with weather data
     val endPointsWithWeather = endPointPairs
