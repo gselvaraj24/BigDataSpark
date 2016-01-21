@@ -42,6 +42,12 @@ li {
     padding: 10px;
 }
 
+.caption {
+    font-size: 14px;
+    color: #445588;
+    font-weight: 400;
+}
+
 .margin-top {
     margin-top: 5px;
 }

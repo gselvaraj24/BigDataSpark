@@ -9,9 +9,9 @@
         <div class="row">
             <p class="pull-right">
                 <a href="/BigDataSpark/" title="Blog home"><img class="bg-img" src="/BigDataSpark/images/glyphicons/glyphicons-21-home.png"></a>
-                {% if page.previous.url %} <a href="/BigDataSpark/{{page.previous.url}}" title="Previous Post: {{page.previous.title}}"><img class="bg-img" src="/BigDataSpark/images/glyphicons/glyphicons-173-rewind.png"></a> {% endif %}
+                {% if page.previous.url %} <a href="/BigDataSpark{{page.previous.url}}" title="Previous Post: {{page.previous.title}}"><img class="bg-img" src="/BigDataSpark/images/glyphicons/glyphicons-173-rewind.png"></a> {% endif %}
                 <a href="#" title="Top"><img class="bg-img" src="/BigDataSpark/images/glyphicons/glyphicons-214-arrow-up.png"></a>
-                {% if page.next.url %}<a href="/BigDataSpark/{{page.next.url}}" title="Next Post: {{page.next.title}}"><img class="bg-img" src="/BigDataSpark/images/glyphicons/glyphicons-177-forward.png"></a>{% endif %}
+                {% if page.next.url %}<a href="/BigDataSpark{{page.next.url}}" title="Next Post: {{page.next.title}}"><img class="bg-img" src="/BigDataSpark/images/glyphicons/glyphicons-177-forward.png"></a>{% endif %}
             </p>
             <p>Page last generated on {{ site.time | date: "%B %e, %Y" }}</p><br/>
         </div>
