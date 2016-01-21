@@ -4,7 +4,7 @@ title: Spark on a cluster (DRAFT)
 summary: This post describes how Spark is run on cluster. First locally and then on Amazon AWS.
 ---
 
-My [previous post](../06/ExtractingData.html) expanded the sample application to perform data extraction
+My [previous post](../06/2ExtractingData.html) expanded the sample application to perform data extraction
 with Spark. I also showed how to load the result to R and perform a simple analysis.
 
 Next, I will run the application on a cluster. First, locally using Spark's own clustering and then in the Amazon cloud
