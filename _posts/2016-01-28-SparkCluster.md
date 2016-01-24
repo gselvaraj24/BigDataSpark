@@ -6,15 +6,14 @@ summary: This post describes how Spark is run on cluster. First locally and then
 
 My [previous post](../27/ExtractingData.html) expanded the sample application to perform data extraction
 with Spark. I also showed how to load the result to R and perform a simple analysis.
-
 Next, I will run the application on a cluster. First, locally using Spark's own clustering and then in the Amazon cloud
 using AWS [Elastic MapReduce](https://aws.amazon.com/elasticmapreduce/details/spark/).
 
 ## Spark standalone mode (local cluster)
 
-It is extremely easy to run a Spark application on a local cluster. Spark's' [standalone mode](http://spark.apache.org/docs/latest/spark-standalone.html)
-requires that Spark has been installed on each node in the cluster. A Spark cluster consists of a master and multiple
-worker nodes.
+It is extremely easy to run a Spark application on a local cluster. Spark's [standalone mode](http://spark.apache.org/docs/latest/spark-standalone.html)
+requires that Spark has been installed on each node in the cluster. We will run the whole "cluster" on a single computer.
+A Spark cluster consists of a master and multiple worker nodes.
 
 A standalone master is started by running the start-up script provided in the Spark release:
 
@@ -40,7 +39,8 @@ Now that a minimal test cluster is running, go back to the web UI and observe th
 
 ## Revised sample project with more data
 
-Let's first check out a revised version of the sample project, and also the submodule with the new data (~50MB).
+Let's first check out a revised version of the sample project, and also the submodule with the new data
+(**Note:** around 50MB of data will be donwloaded).
 {% highlight bash %}
 git checkout cluster
 git submodule init
@@ -48,7 +48,8 @@ git submodule init
 
 There is now a new directory ```BusDataSample``` with much more sample data that now covers one day (December 31, 2015).
 The script ```submitjob.sh``` has also been changed to use this data. It also includes the ```--master spark://Juhas-MBPr.local:7077```
-option, which instructs Spark to run the job on the cluster.
+option, which instructs Spark to run the job on the cluster. Spark's web UI can once again be used for investigating
+the cluster executing operations on the worker node.
 
 <div class="">
 	<img src="/BigDataSpark/assets/spark-webui-stage.png"/><br>
@@ -106,7 +107,7 @@ credit card. See [Amazon's instructions.](https://aws.amazon.com/free/)
 
 Having created and account, we are ready to go. [Amazon EMR](https://aws.amazon.com/elasticmapreduce/) provides a web
 UI and scripts for creating on-demand clusters and running Spark jobs on the cluster.
-[Simple Storage Service (S3)](https://aws.amazon.com/s3/) is a secure, durable, highly-scalable object storage that
+Amazon's [Simple Storage Service (S3)](https://aws.amazon.com/s3/) is a secure, durable, highly-scalable object storage that
 works seamlessly with EMR. A typical usage pattern is
 
 * Collecting data and storing it to S3
@@ -117,7 +118,7 @@ Creating a cluster using the web UI is straightforward, but there are a few poin
 
 * c3.xlarge instances are the cheapest, and work fine unless large amounts of memory are needed
 * Amazon pricing can be a bit complex. Spark jobs are charged based on the usage of AWS instances and EMR
-jobs. Charges are calculated based on instance hours([see the billing FAQ](https://aws.amazon.com/elasticmapreduce/faqs/))
+jobs. Charges are calculated based on instance hours ([see the billing FAQ](https://aws.amazon.com/elasticmapreduce/faqs/))
 for full hours, so a 10 minute job costs as much as a one-hour job.
 * The familiar web UI is available by using a browser extension. Just follow the instructions on the EMR
 job monitoring page.

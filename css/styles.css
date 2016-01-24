@@ -33,6 +33,22 @@ img {
     .narrow-screen {
         display: none;
     }
+    .footer {
+        padding-top: 5px;
+        padding-left: 30px;
+        padding-right: 30px;
+        font-size: 14px;
+        position:fixed;
+        left:0px;
+        bottom:0px;
+        height:55px;
+        width:100%;
+        background:lightgrey;
+    }
+    .with-bottom-margin {
+        margin-bottom: 50px;
+    }
+
 }
 
 @media only screen
@@ -44,20 +60,23 @@ img {
     .narrow-screen {
         display: block;
     }
+    .footer {
+        padding-top: 5px;
+        padding-left: 30px;
+        padding-right: 30px;
+        font-size: 14px;
+        position:fixed;
+        left:0px;
+        bottom:0px;
+        height:85px;
+        width:100%;
+        background:lightgrey;
+    }
+    .with-bottom-margin {
+        margin-bottom: 80px;
+    }
 }
 
-.footer {
-    padding-top: 5px;
-    padding-left: 30px;
-    padding-right: 30px;
-    font-size: 14px;
-    position:fixed;
-    left:0px;
-    bottom:0px;
-    height:80px;
-    width:100%;
-    background:lightgrey;
-}
 
 .footnote {
     font-size: 12px;
@@ -79,6 +98,3 @@ img {
     margin-top: 5px;
 }
 
-.with-bottom-margin {
-    margin-bottom: 75px;
-}
