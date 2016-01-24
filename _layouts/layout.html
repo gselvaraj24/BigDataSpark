@@ -25,13 +25,15 @@
 </head>
 <body data-spy="scroll" data-target=".subnav" data-offset="50">
 
-<div class="container">
-    <div class="content">
-        <div class="row">
+<div class="container with-bottom-margin">
+    <div class="row">
+        <div class="col-md-10">
             <h1>{{page.title}}</h1>
             <a href="http://www.nuvostaq.com">by Nuvostaq</a><br><br>
             <img src="/BigDataSpark/images/spark-logo-hd.png" height="100">
         </div>
+    </div>
+    <div class="col-md-10">
         <div class="row">
             {{ content }}
         </div>
@@ -39,10 +41,6 @@
 </div>
 
 {% include footer.html %}
-
-<!-- Le javascript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
 
 </body>
 </html>

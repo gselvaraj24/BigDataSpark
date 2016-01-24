@@ -2,39 +2,37 @@
 layout: layout
 title: "Big Data with Spark (DRAFT)"
 ---
-<div class="col-md-10">
-    <div class="row">
-        <h2>Introduction</h2>
-        <p>In this series of posts, I take a fresh look at Apache Spark and investigate its
-            applicability to a smaller problem (which in time may grow into a “true” big data problem).
-            The companion <a href="https://github.com/nuvostaq/BigDataSpark">Github project</a>
-            contains the sample code and installation instructions.
-        </p>
-        <p>
-            The series starts by <a href="/BigDataSpark//2016/01/05/Intro.html">introducing Spark and the bus time table case study</a>.
-        </p>
-    </div>
+<div class="row">
+    <div class="col-md-10">
+            <h2>Introduction</h2>
+            <p>In this series of posts, I take a fresh look at Apache Spark and investigate its
+                applicability to a smaller problem (which in time may grow into a “true” big data problem).
+                The companion <a href="https://github.com/nuvostaq/BigDataSpark">Github project</a>
+                contains the sample code and installation instructions.
+            </p>
+            <p>
+                The series starts by <a href="/BigDataSpark//2016/01/05/Intro.html">introducing Spark and the bus time table case study</a>.
+            </p>
+        </div>
 </div>
 {% for post in site.posts offset: 0 limit: 50 %}
-<div class="col-md-7">
-    <div class="row">
-      <div class="col-md-7">
-          {% if post.image %}
-          <a href="{{ post.url }}" >
-          <img border="0" width="250" height="150" src="/BigDataSpark/_posts/{{ post.image }}" alt="">
-          </a>
-          {% endif %}
-      </div>
-      <div class="col-md-9">
-        <h4><strong><a href="/BigDataSpark{{ post.url }}">{{ post.title }}</a></strong></h4>
-        <p>
-          {{ post.summary }}
-        </p>
-        <p>
-          <i class="icon-calendar"></i> {{ post.date | date: "%B %e, %Y" }}
-        </p>
-        <p><a href="/BigDataSpark{{ post.url }}">Read more</a></p>
-      </div>
+<div class="row">
+  <div class="col-md-7">
+      {% if post.image %}
+      <a href="{{ post.url }}" >
+      <img border="0" width="250" height="150" src="/BigDataSpark/_posts/{{ post.image }}" alt="">
+      </a>
+      {% endif %}
+  </div>
+  <div class="col-md-9">
+    <h4><strong><a href="/BigDataSpark{{ post.url }}">{{ post.title }}</a></strong></h4>
+    <p>
+      {{ post.summary }}
+    </p>
+    <p>
+      <i class="icon-calendar"></i> {{ post.date | date: "%B %e, %Y" }}
+    </p>
+    <p><a href="/BigDataSpark{{ post.url }}">Read more</a></p>
     <hr>
   </div>
 </div>
