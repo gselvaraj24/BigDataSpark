@@ -26,6 +26,26 @@ img {
     margin-right: 15px;
 }
 
+@media all {
+    .wide-screen {
+        display: block;
+    }
+    .narrow-screen {
+        display: none;
+    }
+}
+
+@media only screen
+    and (max-device-width: 667px)
+    and (orientation: portrait) {
+    .wide-screen {
+        display: none;
+    }
+    .narrow-screen {
+        display: block;
+    }
+}
+
 .footer {
     padding-top: 5px;
     font-size: 14px;

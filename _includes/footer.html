@@ -1,19 +1,39 @@
 <footer class="footer">
     <div class="container">
-        <div class="row">
-            &copy; Juha Häkkinen, <a href="http://www.nuvostaq.com">Nuvostaq Oy</a>
+        <div  class="wide-screen">
+            <div class="row">
+                &copy; Juha Häkkinen, <a href="http://www.nuvostaq.com">Nuvostaq Oy</a>
+            </div>
+            <div class="row">
+                Uses <a href="http://glyphicons.com/">Glyphicons</a> released under the <a href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 Unported</a> license.
+            </div>
+            <div class="row">
+                <p class="pull-right">
+                    <a href="/BigDataSpark/" title="Blog home"><img class="bg-img" src="/BigDataSpark/images/glyphicons/glyphicons-21-home.png"></a>
+                    {% if page.previous.url %} <a href="/BigDataSpark{{page.previous.url}}" title="Previous Post: {{page.previous.title}}"><img class="bg-img" src="/BigDataSpark/images/glyphicons/glyphicons-173-rewind.png"></a> {% endif %}
+                    <a href="#" title="Top"><img class="bg-img" src="/BigDataSpark/images/glyphicons/glyphicons-214-arrow-up.png"></a>
+                    {% if page.next.url %}<a href="/BigDataSpark{{page.next.url}}" title="Next Post: {{page.next.title}}"><img class="bg-img" src="/BigDataSpark/images/glyphicons/glyphicons-177-forward.png"></a>{% endif %}
+                </p>
+                <p>Page last generated on {{ site.time | date: "%B %e, %Y" }}</p><br/>
+            </div>
         </div>
-        <div class="row">
-            Uses <a href="http://glyphicons.com/">Glyphicons</a> released under the <a href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 Unported</a> license.
-        </div>
-        <div class="row">
-            <p class="pull-right">
-                <a href="/BigDataSpark/" title="Blog home"><img class="bg-img" src="/BigDataSpark/images/glyphicons/glyphicons-21-home.png"></a>
-                {% if page.previous.url %} <a href="/BigDataSpark{{page.previous.url}}" title="Previous Post: {{page.previous.title}}"><img class="bg-img" src="/BigDataSpark/images/glyphicons/glyphicons-173-rewind.png"></a> {% endif %}
-                <a href="#" title="Top"><img class="bg-img" src="/BigDataSpark/images/glyphicons/glyphicons-214-arrow-up.png"></a>
-                {% if page.next.url %}<a href="/BigDataSpark{{page.next.url}}" title="Next Post: {{page.next.title}}"><img class="bg-img" src="/BigDataSpark/images/glyphicons/glyphicons-177-forward.png"></a>{% endif %}
-            </p>
-            <p>Page last generated on {{ site.time | date: "%B %e, %Y" }}</p><br/>
+        <div class="narrow-screen">
+            <div class="row">
+                &copy; Juha Häkkinen, <a href="http://www.nuvostaq.com">Nuvostaq Oy</a>
+            </div>
+            <div class="row">
+                Uses <a href="http://glyphicons.com/">Glyphicons, released under</a>
+            </div>
+            <div class="row">
+                <a href="http://creativecommons.org/licenses/by/3.0/"><img src="/BigDataSpark/images/CC-BY_icon.svg.png"/></a>
+                <p class="pull-right">
+                    <a href="/BigDataSpark/" title="Blog home"><img class="bg-img" src="/BigDataSpark/images/glyphicons/glyphicons-21-home.png"></a>
+                    {% if page.previous.url %} <a href="/BigDataSpark{{page.previous.url}}" title="Previous Post: {{page.previous.title}}"><img class="bg-img" src="/BigDataSpark/images/glyphicons/glyphicons-173-rewind.png"></a> {% endif %}
+                    <a href="#" title="Top"><img class="bg-img" src="/BigDataSpark/images/glyphicons/glyphicons-214-arrow-up.png"></a>
+                    {% if page.next.url %}<a href="/BigDataSpark{{page.next.url}}" title="Next Post: {{page.next.title}}"><img class="bg-img" src="/BigDataSpark/images/glyphicons/glyphicons-177-forward.png"></a>{% endif %}
+                </p>
+            </div>
+
         </div>
     </div>
     <script>
