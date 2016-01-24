@@ -51,7 +51,7 @@ The script ```submitjob.sh``` has also been changed to use this data. It also in
 option, which instructs Spark to run the job on the cluster.
 
 <div class="">
-	<img src="/BigDataSpark/assets/spark-webui-stage.png" width="1000"/><br>
+	<img src="/BigDataSpark/assets/spark-webui-stage.png"/><br>
 	<span class="caption">Graphical view of a processing stage in the Spark web UI</span>
 </div>
 
@@ -86,7 +86,7 @@ Plot 1 shows the estimated probability density function for the slowest quantile
 quantile (red) of the trips during one day.
 
 <div class="center">
-	<img src="/BigDataSpark/assets/cluster-start-distribution.png" width="800"/><br>
+	<img src="/BigDataSpark/assets/cluster-start-distribution.png"/><br>
 	<span class="caption">Plot 1: Bus trip duration vs. hour-of-the-day as a distribution
 	for the fast (red) and slow trips.</span>
 </div>
@@ -94,7 +94,7 @@ quantile (red) of the trips during one day.
 Plot 2 two shows a different view to the same data.
 
 <div class="center">
-	<img src="/BigDataSpark/assets/cluster-pair-plot.png" width="800"/><br>
+	<img src="/BigDataSpark/assets/cluster-pair-plot.png"/><br>
 	<span class="caption">Plot 2: Bus trip duration vs. hour-of-the-day</span>
 </div>
 
@@ -117,7 +117,7 @@ Creating a cluster using the web UI is straightforward, but there are a few poin
 
 * c3.xlarge instances are the cheapest, and work fine unless large amounts of memory are needed
 * Amazon pricing can be a bit complex. Spark jobs are charged based on the usage of AWS instances and EMR
-jobs. Charges are calculated based on instance hours([see the billing FAQ])(https://aws.amazon.com/elasticmapreduce/faqs/)
+jobs. Charges are calculated based on instance hours([see the billing FAQ](https://aws.amazon.com/elasticmapreduce/faqs/))
 for full hours, so a 10 minute job costs as much as a one-hour job.
 * The familiar web UI is available by using a browser extension. Just follow the instructions on the EMR
 job monitoring page.
@@ -128,7 +128,7 @@ The logs can be accessed by ssh'ing to the cluster master and running
 The following figures present a glimpse of the web UI and the way to configure YARN.
 
 <div class="">
-	<img src="/BigDataSpark/assets/amazon-emr-webui.png" width="1000"/><br>
+	<img src="/BigDataSpark/assets/amazon-emr-webui.png"/><br>
 	<span class="caption">Amazon EMR test cluster</span>
 </div>
 

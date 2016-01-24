@@ -12,6 +12,11 @@ li {
     margin-bottom: 10px;
 }
 
+img {
+    max-width: 100%;
+    height: auto;
+}
+
 .bg-img {
     display:block;
     background-repeat: no-repeat;
