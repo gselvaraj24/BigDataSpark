@@ -4,7 +4,7 @@ title: Extracting and processing data using Spark
 summary: This post describes how Spark can be used to extract and process data from the bus timing and weather data sources.
 ---
 
-This post continues from where we left in the [previous post](../26/Setup.html). Now that Spark is installed, and we
+This post continues from where we left in the [previous post](../23/Setup.html). Now that Spark is installed, and we
 can build and run our initial sample application, it's time to start working on a real data analysis task.
 
 ## Enhanced sample program
@@ -106,7 +106,7 @@ route1Dist
 [1] 9335.925
 {% endhighlight %}
 
-The [next post](../28/SparkCluster.html) will show how to run Spark on a cluster. With a bit more data,
+The [next post](../25/SparkCluster.html) will show how to run Spark on a cluster. With a bit more data,
 it is also possible to run a more elaborate statistical analysis with R.
 
 ### Footnotes
