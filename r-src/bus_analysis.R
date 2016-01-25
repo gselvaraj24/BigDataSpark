@@ -1,4 +1,4 @@
-
+# Utility functions
 util.load<-function(fileName, lineNum, originName) {
 	dataSet<-read.csv(fileName, head=F, col.names=c("lineNum","originName","epochDay","weekDay","isSummer","isWorkDay","isSchoolDay","scheduledStartHour","scheduledStartMinute","actualStartHour","actualStartMinute","startDist","endDist","duration","temp", "rain"), stringsAsFactors=TRUE)
 	rawData<-dataSet[dataSet$lineNum == lineNum & dataSet$originName == originName,]
@@ -73,7 +73,7 @@ util.compareTemp=function(data1, data2){
 
 	d1=density(r1)
 	d2=density(r2)
-	plot(c(-25,10),c(0,0.10),type="n",xlab="temperature C",ylab="")
+	plot(c(-25,10),c(0,0.04),type="n",xlab="temperature C",ylab="")
 	lines(d1$x,sc*d1$y*l1)
 	lines(d2$x,sc*d2$y*l2,col="red")
 }
@@ -98,6 +98,18 @@ util.compareDur=function(data1, data2,data3){
 	lines(d3$x,sc*d3$y*l3,col="blue")
 }
 
+# Analysis of the data collected on December 31, 2015
+route=util.load("/tmp/sparkout.csv", 12, "Hallila")
+tr=util.topQuantile(route)
+br=util.bottomQuantile(route)
+# Plot 1
+util.compareStart(tr,br)
+# Plot 2
+route$durMinutes=route$duration/60
+pairs(~durMinutes+scheduledStartHour, route)
+
+
+# Analysis of the large data set (not included in the sample project)
 route1<-util.load("/tmp/SparkResults/res1701.csv", 12, "Hallila")
 t1=util.topQuantile(route1)
 b1=util.bottomQuantile(route1)
@@ -106,7 +118,8 @@ m1=util.midHalf(route1)
 util.compareStart(t1,b1)
 util.compareDur(t1,b1,m1)
 dm=density(m1$scheduledStartHour)
-# Clustering experiments
+
+# Clustering and misc experiments
 
 route2<-util.load("/tmp/SparkResults/res1701.csv", 32, "Keilakuja")
 t2=util.topQuantile(route2)
